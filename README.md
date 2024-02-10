@@ -1,6 +1,6 @@
 # Fugitive
 
-Attempting to remake a demo that was projected onto the wall behind the bar I used to frequent in Tokyo back around 2004/5.
+Attempting to remake a demo that was projected onto the wall behind the bar at a pub I used to frequent in Tokyo back around 2004/5.
 It was a top down view of a person rendered something like a stick man, running across a landscape made up green grass and
 grey roads with white markings and the occasional car park. There was the odd car driving along the roads. Occasionally the
 character would jump in a car and drive along the roads. These roads seem to be procedurally rendered. At some point the
