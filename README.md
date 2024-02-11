@@ -9,3 +9,6 @@ chasing the character, whether they were on foot or in a car. So, while we drank
 least, quite mesmerizing. I've always thought of recreating this, but it wasn't until I came across the great series by
 Radu Mariescu [Radu Mariescu-Istodor](https://github.com/gniziemazity) on self driving cars. I believe this could be the
 platform on which to achieve this recreation. Since I can find no reference to the original demo, I am calling this one Fugitive!
+
+Initially following along with Radu's tutorials to get familiar with his project and methodology, before hopefully branching
+out to complete the Fugitive!
