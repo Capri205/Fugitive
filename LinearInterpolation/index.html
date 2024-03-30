@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <head>
+        <title>Linear Interpolation</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script src="utils.js"></script>
+        <script>
+            myCanvas.width = window.innerWidth;
+            myCanvas.height = window.innerHeight
+            const ctx = myCanvas.getContext( "2d" );
+
+            const A = { x:150, y:150 };
+            const B = { x:500, y:550 };
+            drawDot( ctx, A, "A" );
+            drawDot( ctx, B, "B" );
+
+            /*
+            // draw point quarter way along the line
+            const t = 0.25;
+            const C = {
+                x:lerp( A.x, B.x, t ),
+                y:lerp( A.y, B.y, t )
+            }
+            drawDot( ctx, C, "C")
+            */
+
+            // draw equally spaced points between A and B
+            // and not overwrite our start A and end B dots
+            /*
+            const numDotsBetween = 13;
+            for( let i = 0; i < numDotsBetween; i++ ) {
+                const t = ( i + 1 ) / ( ( numDotsBetween + 2 ) - 1 );
+                const C = vlerp( A, B, t );
+                drawDot( ctx, C, i + 1 );
+            }
+            */
+
+            // bounce a bot between the two points
+            /*
+            animate();
+            function animate() {
+                //comment/uncomment clearRect to see granularity
+                //ctx.clearRect( 0, 0, myCanvas.width, myCanvas.height );
+                const seconds = new Date().getTime()/1000;
+                const t = ( Math.sin( seconds * Math.PI ) + 1 ) / 2;
+                const C = vlerp( A, B, t );
+                drawDot( ctx,  C, "" );
+
+                drawDot( ctx, A, "A" );
+                drawDot( ctx, B, "B" );
+
+                requestAnimationFrame( animate );
+            }
+            */
+
+            // add interpolated colors to bounce
+            const orange = { r:32, g:252, b:3 };
+            const blue = { r: 3, g:248, b:252 };
+            animate();
+            function animate() {
+                //comment/uncomment clearRect to see granularity
+                ctx.clearRect( 0, 0, myCanvas.width, myCanvas.height );
+                const seconds = new Date().getTime()/1000;
+                const t = ( Math.sin( seconds * Math.PI ) + 1 ) / 2;
+                const C = vlerp( A, B, t );
+                const color = vlerp( orange, blue, t );
+                drawDot( ctx,  C, "", `rgb(${color.r},${color.g},${color.b})` );
+
+                drawDot( ctx, A, "A", "white" );
+                drawDot( ctx, B, "B", "white" );
+
+                requestAnimationFrame( animate );
+            }
+        </script>
+    </body>
+</html>

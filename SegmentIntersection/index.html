@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+    <head>
+        <title>Segment Intersection</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script src="utils.js"></script>
+        <script>
+            myCanvas.width = window.innerWidth;
+            myCanvas.height = window.innerHeight
+
+            const A = { x:500, y:550 };
+            const B = { x:150, y:150 };
+            const C = { x:250,  y:600 };
+            const D = { x:600, y:200 };
+
+            const ctx = myCanvas.getContext( "2d" );
+
+            let angle = 0;
+            const mousePos = { x:0, y:0 };
+            document.onmousemove = (event) => {
+                mousePos.x = event.x;
+                mousePos.y = event.y;
+            }
+
+            animate();
+
+            function animate() {
+
+                const radius = 250;
+                A.x = mousePos.x + Math.cos( angle ) * radius;
+                A.y = mousePos.y - Math.sin( angle ) * radius;
+                B.x = mousePos.x - Math.cos( angle ) * radius;
+                B.y = mousePos.y + Math.sin( angle ) * radius;
+                angle += 0.02;
+
+                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height );
+
+                ctx.beginPath();
+                ctx.moveTo( A.x, A.y );
+                ctx.lineTo( B.x, B.y );
+                ctx.moveTo( C.x, C.y );
+                ctx.lineTo( D.x, D.y );
+                ctx.stroke();
+
+                drawDot( A, "A" );
+                drawDot( B, "B" );
+                drawDot( C, "C" );
+                drawDot( D, "D" );
+
+                /*
+                const M = {
+                    x:lerp( A.x, B.x, t ),
+                    y:lerp( A.y, B.y, t )
+                }
+                drawDot( M, "M", t < 0 || t > 1 );
+
+                const N = {
+                    x:lerp( C.x, D.x, t ),
+                    y:lerp( C.y, D.y, t )
+                }
+                drawDot( N, "N", t < 0 || t > 1 );
+                */
+
+                const I = getIntersection( A, B, C, D );
+                if ( I ) {
+                    drawDot( I, "I", true );
+                }
+
+                /*
+                t += 0.005;
+                if ( t > 1.5 ) {
+                    t = -0.5;
+                }
+                */
+                requestAnimationFrame( animate );
+            }
+        </script>
+    </body>
+</html>
